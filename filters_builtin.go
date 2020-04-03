@@ -91,6 +91,9 @@ func init() {
 
 	RegisterFilter("float", filterFloat)     // pongo-specific
 	RegisterFilter("integer", filterInteger) // pongo-specific
+
+	// added by me
+	RegisterFilter("sqlExpandIntArray", filterExpandListInt)
 }
 
 func filterTruncatecharsHelper(s string, newLen int) string {
