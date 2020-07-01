@@ -6,11 +6,12 @@ import (
 	"strings"
 )
 
-type NotListError struct {
+type GError struct {
+	Msg string `json:"msg"`
 }
 
-func (v *NotListError) Error() string {
-	return "Not List! Please check it when use pongo2 template\n"
+func (e *GError) Error() string {
+	return e.Msg
 }
 
 func filterExpandListInt(in *Value, param *Value) (*Value, *Error) {
@@ -24,8 +25,11 @@ func filterExpandListInt(in *Value, param *Value) (*Value, *Error) {
 			str = append(str, fmt.Sprintf("%v", item))
 		}
 	} else {
-		err := &NotListError{}
-		return nil, err
+		return nil, &Error{
+			Sender:   "filter:sqlExpandIntArray",
+			ErrorMsg: "Not list, Pls check it when use expandSql",
+		}
+	}
 
 	return AsValue(strings.Join(str, ",")), nil
 }
