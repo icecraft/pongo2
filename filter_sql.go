@@ -14,7 +14,7 @@ func (e *GError) Error() string {
 	return e.Msg
 }
 
-func filterExpandListInt(in *Value, param *Value) (*Value, *Error) {
+func commonExpandListInt(in *Value, param *Value, sep string) (*Value, *Error) {
 
 	str := make([]string, 0)
 
@@ -31,5 +31,13 @@ func filterExpandListInt(in *Value, param *Value) (*Value, *Error) {
 		}
 	}
 
-	return AsValue(strings.Join(str, ",")), nil
+	return AsValue(strings.Join(str, sep)), nil
+}
+
+func filterExpandListInt(in *Value, param *Value) (*Value, *Error) {
+	return commonExpandListInt(in, value, ",")
+}
+
+func filterExpandListSep(in *Value, param *Value) (*Value, *Error) {
+	return commonExpandListInt(in, value, "|")
 }

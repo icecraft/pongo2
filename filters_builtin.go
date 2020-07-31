@@ -94,6 +94,7 @@ func init() {
 
 	// added by me
 	RegisterFilter("sqlExpandIntArray", filterExpandListInt)
+	RegisterFilter("unitExpandArray", filterExpandListSep)
 }
 
 func filterTruncatecharsHelper(s string, newLen int) string {
